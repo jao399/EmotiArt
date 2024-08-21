@@ -67,14 +67,9 @@ Run the application
 python run.py
 ```
 
-Open a web browser and go to `http://
+Open a web browser and go to `http://..
 
 ```
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Acknowledgements
 
 - [Flask](https://flask.palletsprojects.com/)

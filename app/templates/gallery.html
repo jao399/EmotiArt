@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Community Gallery - EmotiArt</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <h2 style="padding: 50px; display: inline">
+      <span
+        style="background-color: rgba(255, 255, 255, 0.5); padding: 10px 10px"
+      >
+        Community Gallery
+      </span>
+    </h2>
+    {% if artworks %}
+    <div class="artwork-gallery">
+      {% for artwork in artworks %}
+      <div class="artwork-item">
+        <img
+          src="{{ url_for('static', filename='uploads/' + artwork.filename) }}"
+          alt="{{ artwork.title }}"
+        />
+        <h4>{{ artwork.title }}</h4>
+        <p>{{ artwork.description }}</p>
+        <p><strong>Artist:</strong> {{ artwork.creator.username }}</p>
+
+        <a
+          href="{{ url_for('main.show_artwork', artwork_id=artwork.id) }}"
+          class="button small-button"
+          >View</a
+        >
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-gallery">
+      <p>No artworks in the gallery yet. Be the first to upload!</p>
+    </div>
+    {% endif %}
+
+    <main>
+      <a href="{{ url_for('main.index') }}" class="button">Back to Home</a>
+      <a href="{{ url_for('main.logout') }}" class="button">Logout</a>
+      <a href="{{ url_for('main.profile') }}" class="button">Back to Profile</a>
+      <a href="{{ url_for('main.upload') }}" class="button">Upload</a>
+    </main>
+    <footer class="footer">
+      <p style="font-size: xx-small">Copyright © 2024 EmotiArt</p>
+    </footer>
+  </body>
+</html>

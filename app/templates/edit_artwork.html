@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edit {{ artwork.title }} - EmotiArt</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo-container">
+        <img
+          src="{{ url_for('static', filename='images/emotiart_logo.png') }}"
+          alt="EmotiArt Logo"
+          class="logo"
+        />
+        <h1>EmotiArt</h1>
+      </div>
+    </header>
+    <main class="container">
+      <div class="form-container">
+        <h2>Edit Artwork</h2>
+        <form method="post">
+          {{ form.hidden_tag() }}
+          <div class="form-group">
+            {{ form.title.label }} {{ form.title(class="form-control") }} {% if
+            form.title.errors %}
+            <div class="error">{{ form.title.errors[0] }}</div>
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.description.label }} {{
+            form.description(class="form-control") }} {% if
+            form.description.errors %}
+            <div class="error">{{ form.description.errors[0] }}</div>
+            {% endif %}
+          </div>
+          <div class="form-group">{{ form.submit(class="button") }}</div>
+        </form>
+      </div>
+      <a
+        href="{{ url_for('main.show_artwork', artwork_id=artwork.id) }}"
+        class="button"
+        >Cancel</a
+      >
+    </main>
+    <footer class="footer">
+      <p>Copyright © 2024 EmotiArt</p>
+    </footer>
+  </body>
+</html>

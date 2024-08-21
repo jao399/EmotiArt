@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login - EmotiArt</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <main class="container">
+      <div class="form-container">
+        <h2>Login</h2>
+
+        <form method="post">
+          {{ form.hidden_tag() }}
+          <div class="form-group">
+            {{ form.username.label }} {{ form.username(class="form-control") }}
+            {% if form.username.errors %}
+            <div class="error">{{ form.username.errors[0] }}</div>
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.password.label }} {{ form.password(class="form-control") }}
+            {% if form.password.errors %}
+            <div class="error">{{ form.password.errors[0] }}</div>
+            {% endif %}
+          </div>
+          <div class="form-group">{{ form.submit(class="button") }}</div>
+          {% if error %}
+          <div class="error">{{ error }}</div>
+          {% endif %}
+          <a href="{{ url_for('main.index') }}" class="button">Back to Home</a>
+        </form>
+      </div>
+      <a href="{{ url_for('main.register') }}"
+        >Don't have an account? Register here.</a
+      >
+    </main>
+    <footer class="footer">
+      <p style="font-size: xx-small">Copyright © 2024 EmotiArt</p>
+    </footer>
+  </body>
+</html>

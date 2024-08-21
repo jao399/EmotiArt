@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Welcome to EmotiArt</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo-container">
+        <img
+          src="{{ url_for('static', filename='images/emotiart_logo.png') }}"
+          alt="EmotiArt Logo"
+          class="logo"
+        />
+        <h1>EmotiArt</h1>
+      </div>
+    </header>
+    <main class="container">
+      {% if 'logged_in' in session %}
+      <div class="welcome-message">Welcome, {{ session['username'] }}!</div>
+      {% endif %}
+      <p>Your platform for creative expression and community support.</p>
+      <ul class="nav-links">
+        {% if 'logged_in' in session %}
+        <li>
+          <a href="{{ url_for('main.profile') }}" class="button">Profile</a>
+        </li>
+        <li>
+          <a href="{{ url_for('main.upload') }}" class="button"
+            >Upload Artwork</a
+          >
+        </li>
+        <li>
+          <a href="{{ url_for('main.gallery') }}" class="button"
+            >Community Gallery</a
+          >
+        </li>
+        <li>
+          <a href="{{ url_for('main.logout') }}" class="button">Logout</a>
+        </li>
+        {% else %}
+        <li>
+          <a href="{{ url_for('main.register') }}" class="button">Register</a>
+        </li>
+        <li><a href="{{ url_for('main.login') }}" class="button">Login</a></li>
+        {% endif %}
+      </ul>
+    </main>
+    <footer class="footer">
+      <p style="font-size: xx-small">Copyright © 2024 EmotiArt</p>
+    </footer>
+  </body>
+</html>

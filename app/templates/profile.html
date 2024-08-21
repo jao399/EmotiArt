@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ user.username }}'s Profile - EmotiArt</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <main class="container">
+      <div class="profile-header">
+        <h2>{{ user.username }}'s Profile</h2>
+        <p>Email: {{ user.email }}</p>
+        <a href="{{ url_for('main.upload') }}" class="button"
+          >Upload New Artwork</a
+        >
+      </div>
+      <h3>Your Artworks</h3>
+      {% if artworks %}
+      <div class="artwork-gallery">
+        {% for artwork in artworks %}
+        <div class="artwork-item">
+          <img
+            src="{{ url_for('static', filename='uploads/' + artwork.filename) }}"
+            alt="{{ artwork.title }}"
+          />
+          <h4>{{ artwork.title }}</h4>
+          <p>{{ artwork.description }}</p>
+          <div class="artwork-actions">
+            <a
+              href="{{ url_for('main.edit_artwork', artwork_id=artwork.id) }}"
+              class="button small-button"
+              >Edit</a
+            >
+            <form
+              action="{{ url_for('main.delete_artwork', artwork_id=artwork.id) }}"
+              method="post"
+              onsubmit="return confirm('Are you sure you want to delete this?');"
+            >
+              <button type="submit" class="button small-button">Delete</button>
+            </form>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p>You haven't uploaded any artwork yet.</p>
+      {% endif %}
+      <a href="{{ url_for('main.gallery') }}" class="button"
+        >Go to Community Gallery</a
+      >
+      <a href="{{ url_for('main.index') }}" class="button">Back to Home</a>
+      <a href="{{ url_for('main.logout') }}" class="button">Logout</a>
+    </main>
+    <footer class="footer">
+      <p style="font-size: xx-small">Copyright © 2024 EmotiArt</p>
+    </footer>
+  </body>
+</html>
